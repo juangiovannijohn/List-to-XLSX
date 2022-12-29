@@ -1,0 +1,60 @@
+<div class="container">
+    <p>
+    Sube un Archivo XLSX con los IDs de los usuarios que quieras obtener toda su información 
+    </p>
+    <p>El encabezado de la primer columna se debe llamar "ID"</p>
+
+    <div class="jgj_container__form">
+        <h3 class="jgj_container_title">Consulta</h3>
+        <div class="spinner">
+            <div class="fileUpload btn btn-primary">
+                <tr>
+                    <td>
+                        
+                            <button mat-button class=" button-input">
+                                Subir<mat-icon>upload_file</mat-icon>
+                            </button>
+                       
+                    </td>
+                    <td>
+                        <input id="" placeholder="Archivo Excel..." disabled="disabled" #inputTextRead class="input-text"
+                               accept=".xlsx, .cvs, .lsx" />
+                    </td>
+                    <input id="" type="file" class="upload" (change)="onChangeRead($event)" accept=".xlsx, .cvs, .lsx" />
+                </tr>
+            </div>
+            <button mat-raised-button (click)="fileUpload()" class="button-excel">
+                Procesar
+            </button>
+        </div>
+    </div>
+</div>
+<table mat-table [dataSource]="dataSource" class=" demo-table">
+    <!-- Name Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Company Column -->
+    <ng-container matColumnDef="Empresa">
+      <th mat-header-cell *matHeaderCellDef> Empresa </th>
+      <td mat-cell *matCellDef="let element"> {{element.company.name}} </td>
+    </ng-container>
+     
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div>
+    <h2>Gracias: JSON Placeholder API</h2>
+    <h4>[GET] https://jsonplaceholder.typicode.com/users</h4>
+  </div>
+
+  
+  

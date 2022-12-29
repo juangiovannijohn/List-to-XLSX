@@ -1,0 +1,32 @@
+.demo-table {
+    width: 100%;
+}
+.mat-header-cell{
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0px 10px;
+}
+.mat-cell{
+    padding: 0px 10px;
+    text-align: center;
+
+}
+.jgj_container__form{
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .jgj_container_title{
+    padding: 0px 10px;
+}
+.fileUpload tr{
+    margin: 0px 10px!important;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer !important;
+}
+.input-text, .button-input{
+    height: 50px !important;
+}
+.button-input{
+      border-radius: 0px !important;
+}

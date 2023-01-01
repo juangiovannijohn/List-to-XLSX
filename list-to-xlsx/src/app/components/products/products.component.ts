@@ -5,7 +5,8 @@ import { Usuario, File } from '../../models/usuario.model';
 
 import {MatTableDataSource} from '@angular/material/table';
 import * as XLSX from 'xlsx';
-
+import * as FileSaver from 'file-saver';
+import { FileSaverService  } from 'ngx-filesaver';
 
 
 
@@ -24,21 +25,23 @@ export class ProductsComponent implements OnInit {
   displayedColumns: string[] = [ 'id', 'Nombre', 'Empresa'];
   dataSource:any;
   file: any;
+  juan:Array<any> =[];
 
   @ViewChild('inputText') myDomElement!: ElementRef;
   @ViewChild('inputTextRead') myDomElementRead!: ElementRef;
 
   constructor(
-    private _products: ProductsService
+    private _products: ProductsService,
+    private _fileService : FileSaverService
   ) { }
 
   ngOnInit(){
     this._products.getAllProducts().subscribe({
       next: (resp) =>{ 
-        console.log(resp)
+        //console.log(resp)
         this.usuarios = resp;
         this.usuario = this.usuarios[0];
-        console.log( JSON.stringify( this.usuario))
+        
         this.dataSource = new MatTableDataSource<any>(this.usuarios);
       },
       error: err => {
@@ -46,7 +49,6 @@ export class ProductsComponent implements OnInit {
       }
     })
 
-    this.hola();
 
 
   }
@@ -54,9 +56,6 @@ export class ProductsComponent implements OnInit {
 
     this.file = event.target.files[0];
     console.log(this.file)
-  }
-  fileUpload(){
-    
     if (this.file === null) {
       alert('Debe de subir un archivo para realizar la accion');
       return;
@@ -81,38 +80,83 @@ export class ProductsComponent implements OnInit {
       let idUsuarios= []; 
       for (let i = 1; i < dataSheet.length; i++) { 
         if(dataSheet[i][0]){
-          console.log(dataSheet[i][0])
           idUsuarios.push(dataSheet[i][0]);
         }
       }
-      console.log({idUsuarios})
-
-    
 
       
+      //console.log(typeof idUsuarios)
+      this.hola(idUsuarios);
+    }
+  }
+  fileUpload(){
+      //DESCARGA EXCEL
+      console.log('Data',this.juan.length)
+      if (this.juan.length > 0) {
+        //Se crea el nuevo excel
+        const wscols = [
+          {wch: 5},
+          {wch: 20},
+          {wch: 20},
+          {wch: 15},
+          {wch: 15},
+          {wch: 20},
+          {wch: 20},
+          {wch: 20},
+          {wch: 15},
+        ]
+        const worksheet = XLSX.utils.json_to_sheet(this.juan);
+        worksheet['!cols'] = wscols;
+        const workbookNew = 
+        {
+          Sheets: {
+            'prueba': worksheet
+          },
+          SheetNames: ['prueba']
+        }
+        
+        const excelBuffer = XLSX.write(workbookNew, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+        this._fileService.save(blob, "Consulta.xlsx");
+      }
+       //DESCARGA EXCEL--------
+ 
     }
     
-  }
+  
 
 
   //La funcion hola obtiene un array de id, y con eso hago un bucle de consultas GET al endpoint
-   juan: Array<any> = [];
-  hola(arr = [3,5]){
+  hola(arr:Array<any>){
     
     for (let i = 0; i < arr.length; i++) {
       const element = arr[i];
       this._products.getUser(element).subscribe({
         next: (resp) =>{ 
-          console.log(resp)
-          this.juan.push(resp)
+          //console.log('respuesta de serivicio busqueda de usuario individual',resp)
+          const { address, company} = resp
+
+          let objeto = {
+            ID: resp.id,
+            NOMBRE: resp.name,
+            EMPRESA: company.name,
+            USUARIO: resp.username,
+            PORTFOLIO: resp.website,
+            EMAIL: resp.email,
+            TELEFONO: resp.phone,
+            DIRECCION: address.street,
+            CIUDAD: address.city,
+          }
+          this.juan.push(objeto)
         },
         error: err => {
           console.warn(err)
         },
-        complete: ()=> {console.log(this.juan)}
+        complete: ()=> {}
       })
       
     }
+    
   }
 
 }

@@ -13,6 +13,9 @@ export class ProductsService {
     private http:HttpClient
   ) { }
 
+
+   //'https://api.escuelajs.co/api/v1/products'
+   //
   getAllProducts(){
     const url = 'https://jsonplaceholder.typicode.com/users';
     return this.http.get<Usuario>(url);

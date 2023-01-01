@@ -10,14 +10,7 @@
             <div class="fileUpload btn btn-primary">
                 <tr>
                     <td>
-                        
-                            <button mat-button class=" button-input">
-                                Subir<mat-icon>upload_file</mat-icon>
-                            </button>
-                       
-                    </td>
-                    <td>
-                        <input id="" placeholder="Archivo Excel..." disabled="disabled" #inputTextRead class="input-text"
+                        <input type="text" id="" placeholder="Archivo Excel..." disabled="disabled" #inputTextRead class="input-text"
                                accept=".xlsx, .cvs, .lsx" />
                     </td>
                     <input id="" type="file" class="upload" (change)="onChangeRead($event)" accept=".xlsx, .cvs, .lsx" />
@@ -28,6 +21,15 @@
             </button>
         </div>
     </div>
+    <div>
+      <h3 class="jgj_container_title">Consulta</h3>
+      <button mat-stroked-button color="primary"  > Subir archivo </button>
+      <input mat-stroked-button id="" type="file" class="upload" (change)="onChangeRead($event)" accept=".xlsx, .cvs, .lsx" />
+    </div>
+    <mat-form-field >
+      <mat-label> Nombre Archivo </mat-label>
+      <input type="text" placeholder="Archivo Excel..." disabled #inputTextRead matInput>
+    </mat-form-field>
 </div>
 <table mat-table [dataSource]="dataSource" class=" demo-table">
     <!-- Name Column -->

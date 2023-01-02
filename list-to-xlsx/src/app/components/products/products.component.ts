@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { FileSaverService  } from 'ngx-filesaver';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 
 
 
@@ -32,7 +33,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _products: ProductsService,
-    private _fileService : FileSaverService
+    private _fileService : FileSaverService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(){
@@ -56,10 +58,7 @@ export class ProductsComponent implements OnInit {
 
     this.file = event.target.files[0];
     console.log(this.file)
-    if (this.file === null) {
-      alert('Debe de subir un archivo para realizar la accion');
-      return;
-    }
+
     console.log('Inicio de consulta de usuarios desde('+this.file.name+').');
 
     let fileReader = new FileReader();
@@ -90,6 +89,14 @@ export class ProductsComponent implements OnInit {
     }
   }
   fileUpload(){
+    console.log(this.file)
+    if (this.file === undefined) {
+      this._snackBar.open('Debes selecionar un archivo','Aceptar',
+      {
+        duration: 1000,
+        panelClass: ['bg-violet-500','text-white'],})
+      return;
+    }
       //DESCARGA EXCEL
       console.log('Data',this.juan.length)
       if (this.juan.length > 0) {

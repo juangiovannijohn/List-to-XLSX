@@ -1,37 +1,27 @@
-<div class="container">
-    <p>
+<div class="container mx-auto">
+  <p class="text-3xl">List to Excel</p>
+    <p class="">
     Sube un Archivo XLSX con los IDs de los usuarios que quieras obtener toda su información 
     </p>
-    <p>El encabezado de la primer columna se debe llamar "ID"</p>
+    
+    <section class="w-full bg-slate-200 p-3 rounded-lg mb-3">
+      <div class="block w-full">
+        <p class="text-xl pl-1.5 font-bold text-violet-700">Subir Archivo</p>
+        <span class="sr-only">Subir un archivo Excel</span>
+        <input type="file" (change)="onChangeRead($event)" class="block w-full mb-2 text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-violet-50 file:text-violet-700
+        hover:file:bg-violet-100
+        "  accept=".xlsx, .cvs, .lsx"/>
+        <p class="italic text-violet-500 pl-1.5">El encabezado de la primer columna se debe llamar "ID"</p>
+          <button class="my-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-700 text-violet-50 font-semibold hover:text-violet-700 hover:bg-violet-200" (click)="fileUpload()"> Procesar </button>
+        </div> 
+    </section>
 
-    <div class="jgj_container__form">
-        <h3 class="jgj_container_title">Consulta</h3>
-        <div class="spinner">
-            <div class="fileUpload btn btn-primary">
-                <tr>
-                    <td>
-                        <input type="text" id="" placeholder="Archivo Excel..." disabled="disabled" #inputTextRead class="input-text"
-                               accept=".xlsx, .cvs, .lsx" />
-                    </td>
-                    <input id="" type="file" class="upload" (change)="onChangeRead($event)" accept=".xlsx, .cvs, .lsx" />
-                </tr>
-            </div>
-            <button mat-raised-button (click)="fileUpload()" class="button-excel">
-                Procesar
-            </button>
-        </div>
-    </div>
-    <div>
-      <h3 class="jgj_container_title">Consulta</h3>
-      <button mat-stroked-button color="primary"  > Subir archivo </button>
-      <input mat-stroked-button id="" type="file" class="upload" (change)="onChangeRead($event)" accept=".xlsx, .cvs, .lsx" />
-    </div>
-    <mat-form-field >
-      <mat-label> Nombre Archivo </mat-label>
-      <input type="text" placeholder="Archivo Excel..." disabled #inputTextRead matInput>
-    </mat-form-field>
-</div>
-<table mat-table [dataSource]="dataSource" class=" demo-table">
+
+<table mat-table [dataSource]="dataSource" class="rounded-lg demo-table">
     <!-- Name Column -->
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -54,9 +44,15 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <div>
+    <p class="text-lg mt-2">Notas sobre la app:</p>
+    <p>Éstos usuarios provienen de una API pública. Al iniciar la app se hace una consulta al endpoint de usuarios, se obtiene el objeto JSON y se muestra en pantalla con la tabla.</p>
+    <p>Al cargarse el archivo Excel, el proceso de la app es leer los IDs y luego hacer una petición por cada usuario al endpoint. Se realiza un proceso de refactorización de la información que proviene de la API, y luego se lo agrega dentro en un nuevo archivo Excel el cual se descarga automaticamente.</p>
+  </div>
+  <div>
     <h2>Gracias: JSON Placeholder API</h2>
     <h4>[GET] https://jsonplaceholder.typicode.com/users</h4>
   </div>
+</div>
 
   
   

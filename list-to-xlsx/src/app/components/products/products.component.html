@@ -1,56 +1,62 @@
-<div class="container max-w-2xl mx-auto  border-solid border-2 border-black">
-  <div class="flex flex-row items-center px-3 w-100 bg-orange-300 h-8">
+<div
+  class="container max-w-2xl mx-auto border-solid border-black border-x-2 border-b-2 border-t-0"
+>
+  <div class="flex flex-row items-center px-3 w-100 bg-amber-200 h-8">
     <div class="bg-rose-500 w-3 h-3 mr-1.5 rounded-full"></div>
     <div class="bg-slate-300 w-3 h-3 mr-1.5 rounded-full"></div>
     <div class="bg-green-500 w-3 h-3 mr-1.5 rounded-full"></div>
   </div>
-  <p class="text-5xl text-violet-700">List to Excel</p>
-  <p class="">
-    Sube un Archivo XLSX con los IDs de los usuarios que quieras obtener toda su
-    información
-  </p>
-  <a href="https://github.com/juangiovannijohn/List-to-XLSX" target="_blank" class=" inline-block cursor-pointer my-1 py-3 px-5 rounded-full border-0 text-sm font-semibold bg-violet-700 text-violet-50 font-semibold hover:text-violet-700 hover:bg-violet-200">Ver repositorio</a>
- 
+  <div class="p-5 bg-violet-100 border-solid border-black border-y-2">
+    <p class="text-5xl mb-3 text-violet-700">List to Excel</p>
+    <p class="mb-5">
+      Sube un Archivo XLSX con los IDs de los usuarios que quieras obtener toda
+      su información
+    </p>
 
-  <section class="w-full p-5">
-    <div class="block w-full">
-      <p class="text-xl pl-1.5 text-slate-100">Subir Archivo</p>
-      <span class="sr-only">Subir un archivo Excel</span>
-      <input
-        type="file"
-        (change)="onChangeRead($event)"
-        class="block w-full mb-2 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-        accept=".xlsx, .cvs, .lsx"
-      />
-      <p class="italic text-slate-100 pl-1.5">
-        El encabezado de la primer columna se debe llamar "ID"
-      </p>
-      <button
-        class="my-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-700 text-violet-50 font-semibold hover:text-violet-700 hover:bg-violet-200"
-        (click)="fileUpload()"
-      >
-        Procesar
-      </button>
+    <div class="block w-100">
+      <p class="text-xl mb-2 text-violet-700">Subir Archivo</p>
+      <div class="flex flex-row">
+        <div class="basis-2/3">
+          <input
+            type="file"
+            (change)="onChangeRead($event)"
+            class="py-2 min-w-[160px] block w-full mb-2 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm  file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:shadow-[2px_2px_0px_1px_rgba(0,0,0,1)] file:border-solid file:border-2 file:border-black file:uppercase file:tracking-wider"
+            accept=".xlsx, .cvs, .lsx"
+          />
+          <p class="italic text-sm text-gray-700">
+            El encabezado de la primer columna se debe llamar "ID"
+          </p>
+        </div>
+        <div class="flex justify-center basis-1/3 self-center">
+          <button
+            class="max-h-10 min-w-[160px] py-2 px-4 rounded-full text-sm bg-violet-700 text-violet-50 hover:text-violet-700 hover:bg-violet-200 shadow-[2px_2px_0px_1px_rgba(0,0,0,1)] border-solid border-2 border-black uppercase tracking-wider"
+            (click)="fileUpload()"
+          >
+            Procesar
+          </button>
+        </div>
+      </div>
     </div>
-  </section>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Empresa</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of usuarios" >
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.company.name}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div>
+  </div>
+  <div class="bg-teal-400 p-5 border-solid border-black border-b-2">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Empresa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of usuarios">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.company.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="p-5 bg-purple-500 border-solid border-black border-b-2">
     <p class="text-2xl text-violet-500">Notas sobre la app:</p>
     <p>
       Éstos usuarios provienen de una API pública. Al iniciar la app se hace una
@@ -64,10 +70,15 @@
       agrega dentro en un nuevo archivo Excel el cual se descarga
       automaticamente.
     </p>
-  </div>
-  <div class="">
     <p class="text-xl text-violet-500">Gracias: JSON Placeholder API</p>
     <p>[GET] https://jsonplaceholder.typicode.com/users</p>
-    <a href="https://github.com/juangiovannijohn/List-to-XLSX" target="_blank" class="inline-block cursor-pointer mt-1.5 py-3 px-5 rounded-full border-0 text-sm font-semibold bg-violet-700 text-violet-50 font-semibold hover:text-violet-700 hover:bg-violet-200">Ver repositorio</a>
+  </div>
+  <div class="flex justify-center items-center min-h-[200px]  p-5 bg-rose-400">
+    <a
+      href="https://github.com/juangiovannijohn/List-to-XLSX"
+      target="_blank"
+      class="inline-block  text-center cursor-pointer max-h-10 min-w-[160px] py-2 px-4 rounded-full text-sm  bg-violet-700 text-violet-50  hover:text-violet-700 hover:bg-violet-200 shadow-[2px_2px_0px_1px_rgba(0,0,0,1)] border-solid border-2 border-black uppercase tracking-wider"
+      >Ver repositorio</a
+    >
   </div>
 </div>

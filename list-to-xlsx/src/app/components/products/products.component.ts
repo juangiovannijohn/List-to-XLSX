@@ -3,11 +3,9 @@ import { Observable, Subscriber } from 'rxjs';
 import { ProductsService } from 'src/app/services/products.service';
 import { Usuario, File } from '../../models/usuario.model';
 
-import {MatTableDataSource} from '@angular/material/table';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { FileSaverService  } from 'ngx-filesaver';
-import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 
 
 
@@ -33,8 +31,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _products: ProductsService,
-    private _fileService : FileSaverService,
-    private _snackBar: MatSnackBar
+    private _fileService : FileSaverService
   ) { }
 
   ngOnInit(){
@@ -43,7 +40,6 @@ export class ProductsComponent implements OnInit {
         //console.log(resp)
         this.usuarios = resp;
         this.usuario = this.usuarios[0];
-        this.dataSource = new MatTableDataSource<any>(this.usuarios);
       },
       error: err => {
         console.warn(err)
@@ -90,11 +86,7 @@ export class ProductsComponent implements OnInit {
   fileUpload(){
     console.log(this.file)
     if (this.file === undefined) {
-      this._snackBar.open('Debes selecionar un archivo','Aceptar',
-      {
-        duration: 1000,
-        panelClass: ['bg-violet-500','text-white'],})
-      return;
+
     }
       //DESCARGA EXCEL
       console.log('Data',this.juan.length)

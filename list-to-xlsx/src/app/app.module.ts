@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '../app/material/material.module'
+import { MaterialModule } from '../app/material/material.module';
+import { NavbarComponent } from './components/navbar/navbar.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
+    NavbarComponent,
 
   ],
   imports: [
@@ -20,7 +22,6 @@ import { MaterialModule } from '../app/material/material.module'
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
     
   ],
   providers: [

@@ -21,7 +21,7 @@ import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  usuarios: any= [];
+  usuarios:Array< Usuario>= [];
   usuario?:any;
   displayedColumns: string[] = [ 'id', 'Nombre', 'Empresa'];
   dataSource:any;
@@ -39,11 +39,10 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(){
     this._products.getAllProducts().subscribe({
-      next: (resp) =>{ 
+      next: (resp: any) =>{ 
         //console.log(resp)
         this.usuarios = resp;
         this.usuario = this.usuarios[0];
-        
         this.dataSource = new MatTableDataSource<any>(this.usuarios);
       },
       error: err => {

@@ -1,4 +1,9 @@
-<div class="container max-w-2xl mx-auto py-7">
+<div class="container max-w-2xl mx-auto  border-solid border-2 border-black">
+  <div class="flex flex-row items-center px-3 w-100 bg-orange-300 h-8">
+    <div class="bg-rose-500 w-3 h-3 mr-1.5 rounded-full"></div>
+    <div class="bg-slate-300 w-3 h-3 mr-1.5 rounded-full"></div>
+    <div class="bg-green-500 w-3 h-3 mr-1.5 rounded-full"></div>
+  </div>
   <p class="text-5xl text-violet-700">List to Excel</p>
   <p class="">
     Sube un Archivo XLSX con los IDs de los usuarios que quieras obtener toda su
@@ -7,7 +12,7 @@
   <a href="https://github.com/juangiovannijohn/List-to-XLSX" target="_blank" class=" inline-block cursor-pointer my-1 py-3 px-5 rounded-full border-0 text-sm font-semibold bg-violet-700 text-violet-50 font-semibold hover:text-violet-700 hover:bg-violet-200">Ver repositorio</a>
  
 
-  <section class="w-full bg-[#424242] p-5 border-b-2 border-slate-400/50">
+  <section class="w-full p-5">
     <div class="block w-full">
       <p class="text-xl pl-1.5 text-slate-100">Subir Archivo</p>
       <span class="sr-only">Subir un archivo Excel</span>
@@ -28,28 +33,23 @@
       </button>
     </div>
   </section>
-
-  <table mat-table [dataSource]="dataSource" class="mb-4 demo-table">
-    <!-- Name Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="Nombre">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
-
-    <!-- Company Column -->
-    <ng-container matColumnDef="Empresa">
-      <th mat-header-cell *matHeaderCellDef>Empresa</th>
-      <td mat-cell *matCellDef="let element">{{ element.company.name }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Empresa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of usuarios" >
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.company.name}}</td>
+      </tr>
+    </tbody>
   </table>
+
   <div>
     <p class="text-2xl text-violet-500">Notas sobre la app:</p>
     <p>

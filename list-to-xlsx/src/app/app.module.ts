@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../app/material/material.module';
-import { NavbarComponent } from './components/navbar/navbar.component'
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DialogEjemploComponent } from './components/dialog-ejemplo/dialog-ejemplo.component'
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
     AppComponent,
     ProductsComponent,
     NavbarComponent,
+    DialogEjemploComponent,
 
   ],
   imports: [
@@ -22,7 +24,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
+    MaterialModule
   ],
   providers: [
   ],

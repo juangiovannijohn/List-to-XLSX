@@ -6,6 +6,8 @@ import { Usuario, File } from '../../models/usuario.model';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { FileSaverService  } from 'ngx-filesaver';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogEjemploComponent } from '../dialog-ejemplo/dialog-ejemplo.component'
 
 
 
@@ -31,7 +33,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _products: ProductsService,
-    private _fileService : FileSaverService
+    private _fileService : FileSaverService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(){
@@ -121,7 +124,11 @@ export class ProductsComponent implements OnInit {
  
     }
     
-  
+  ejemplo(){
+
+   const ejemplo = this.dialog.open(DialogEjemploComponent, {panelClass: 'jgj_panel', backdropClass: 'jgj_sombreado', hasBackdrop: true});
+   ejemplo.afterClosed().subscribe(result => console.log(result))
+  }
 
 
   //La funcion hola obtiene un array de id, y con eso hago un bucle de consultas GET al endpoint
